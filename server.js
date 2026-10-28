@@ -7,7 +7,12 @@ const PORT = 5000
 app.use('/api/books',require('./routes/book.route'))
 
 connectDB()
-
-app.listen(PORT,()=>{
-    console.log(`Server is runnning on port ${PORT}`)
-})
+    .then(() => {
+        app.listen(PORT,()=>{
+            console.log(`Server is running on port ${PORT}`)
+        })
+    })
+    .catch((error) => {
+        console.error('Server startup failed:', error.message);
+        process.exitCode = 1;
+    });
